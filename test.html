@@ -1,0 +1,59 @@
+﻿<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title></title>
+</head>
+<body>
+<script>
+	// 工厂模式
+	function createPerson(name,age,job){
+		var o = new Object();
+		o.name = name;
+		o.age = age;
+		o.job = job;
+		o.sayName = function(){
+			alert(this.name);
+		}
+		return o;
+	}
+	var person1 = new createPerson('shy','24','coding');
+
+
+	// 构造函数模式
+	function Person(name,age,job){
+		this.name = name;
+		this.age  = age;
+		this.job = job;
+		this.sayName = function(){
+			alert(this.name);
+		}
+	}
+	var person2 = new Person('shy','24','coding');
+	console.log(person2.constructor == Person);
+	console.log(person2 instanceof Object);
+	console.log(person2 instanceof Person);
+
+	// 原型模式
+	function Person1(){}
+	Person1.prototype.name = 'shy';
+	Person1.prototype.age = '24';
+	Person1.prototype.job = 'conding';
+	Person1.prototype.sayName = function(){
+		alert(this.name);
+	}
+	var person3 = new Person1();
+	console.log(Person1.prototype.isPrototypeOf(person3));
+	console.log(Object.getPrototypeOf(person3) == Person1.prototype);
+
+	console.log(person3.name);
+	person3.name = 'shyboy';
+	console.log(person3.name);
+	delete person3.name;
+	console.log(person3.name);
+	console.log(person3.hasOwnProperty('name)'));
+
+</script>
+</body>
+</html>
