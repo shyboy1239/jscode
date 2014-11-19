@@ -44,7 +44,7 @@
 	Person1.prototype.sayName = function(){
 		alert(this.name);
 	}
-	var person1 = new Person1();
+	var  person1 = new Person1();
 
 	console.log(Person1.prototype.isPrototypeOf(person1));
 	console.log(Object.getPrototypeOf(person1) == Person1.prototype);
@@ -102,8 +102,48 @@
 			console.log("shy");
 		}
 	}
-	person2.sayName();
+	// person2.sayName();  //error
 
+
+	// 原型链
+	function SuperType(){
+		this.property = true;
+	}
+	SuperType.prototype.getSuperValue = function(){
+		return this.property;
+	}
+	function SubType(){
+		this.subproperty = false;
+	}
+	SubType.prototype = new SuperType();
+	SubType.prototype.getSubValue = function(){
+		return this.subproperty;
+	}
+	var instance = new SubType();
+	console.log(instance.getSuperValue());
+	console.log(instance.getSubValue());
+
+	// 原型式继承
+	function object(o){
+		function F(){}
+		F.prototype = o;
+		return new F();
+	}
+	var person3 = {
+		name:"shy",
+		friends:["a","b","c"]
+	}
+	var anotherPerson = object(person3);
+	// var anotherPerson = Object.create(person3);
+	anotherPerson.name = "Greg";
+	anotherPerson.friends.push("Rob");
+
+	var yetAnotherPerson = object(person3);
+	// var yetAnotherPerson = Object.create(person3);
+	yetAnotherPerson.name = "Linda";
+	yetAnotherPerson.friends.push("Barbie");
+
+	console.log(person3.friends);
 
 </script>
 </body>
