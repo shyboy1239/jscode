@@ -222,6 +222,43 @@
 		}
 		return result;
 	}
+	var name = "The Window";
+	var object = {
+		name:"My Object",
+		getNameFunc:function(){
+			return function(){
+				return this.name;
+			}
+		}
+	};
+
+	// 私有变量
+	function MyObject(){
+		var privateVariable = 10;
+		function privateFunction(){
+			return false;
+		}
+		this.publicMethod = function(){
+			privateVariable++;
+			alert(privateVariable);
+			return privateFunction();
+		}
+	}
+
+	// 静态私有变量
+	(function(){
+		var privateVariable = 10;
+		function privateFunction(){
+			return false;
+		}
+		// 全局变量
+		MyObject1 = function(){
+		};
+		MyObject1.prototype.publicMethod = function(){
+			privateVariable++;
+			return privateFunction();
+		}
+	})();
 </script>
 </body>
 </html>
